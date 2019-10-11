@@ -1,0 +1,9 @@
+# Puppet agent download
+# https://downloads.puppetlabs.com/windows/puppet5/
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco install -y git
+choco install -y vscode
+
+cd  C:\ProgramData\PuppetLabs\code\modules
+git clone https://github.com/puppetlabs/puppetlabs-dsc.git
+git clone https://github.com/puppetlabs/puppetlabs-reboot.git
