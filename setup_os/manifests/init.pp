@@ -1,4 +1,6 @@
 class setup_os {
+
+  # https://lark-it.atlassian.net/browse/FCB-138
   dsc_registry {'deny_ts_connection':
     dsc_ensure => 'Present',
     dsc_key => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server',
@@ -8,9 +10,18 @@ class setup_os {
     dsc_force     => true,
   }
 
+  # https://lark-it.atlassian.net/browse/FCB-141
   dsc_file {'PCW Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
     dsc_destinationpath => 'c:\\PCW',
   }
+
+  # https://lark-it.atlassian.net/browse/FCB-150
+  dsc_file {'Temp Directory':
+    dsc_ensure          => 'present',
+    dsc_type            => 'Directory',
+    dsc_destinationpath => 'c:\\Temp',
+  }
+
 }

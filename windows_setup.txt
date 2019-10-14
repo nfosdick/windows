@@ -7,6 +7,20 @@ refreshenv
 choco install -y git
 choco install -y vscode
 
-cd  C:\ProgramData\PuppetLabs\code\modules
+$parentdir="larktemp"
+$file="Dpuppet-agent-5.5.16-x86.msi"
+$url="http://downloads.puppetlabs.com/windows/puppet5/$file"
+New-Item -Path "c:\" -Name "$parentdir" -ItemType "directory"
+Set-Location "c:\${parentdir}"
+
+$wc = New-Object net.webclient
+$wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
+$wc = New-Object net.webclient
+msiexec /qn /norestart /i $file
+sleep 30
+refreshenv
+
+cd "C:\ProgramData\PuppetLabs\code\modules"
 git clone https://github.com/puppetlabs/puppetlabs-dsc.git
 git clone https://github.com/puppetlabs/puppetlabs-reboot.git
+git clone https://github.com/nfosdick/windows.git
