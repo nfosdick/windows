@@ -36,5 +36,6 @@ class setup_os {
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
     dsc_destinationpath => 'c:\\Toolbox\\PowerShellScripts',
+    require             => Dsc_file[ 'Toolbox Directory' ],
   }
 }
