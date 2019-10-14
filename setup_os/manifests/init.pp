@@ -7,4 +7,10 @@ class setup_os {
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
+
+  dsc_file {'PCW Directory':
+    dsc_ensure          => 'present',
+    dsc_type            => 'Directory',
+    dsc_destinationpath => 'c:\\PCW',
+  }
 }
