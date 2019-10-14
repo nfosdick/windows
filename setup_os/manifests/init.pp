@@ -24,4 +24,10 @@ class setup_os {
     dsc_destinationpath => 'c:\\Temp',
   }
 
+  #https://lark-it.atlassian.net/browse/FCB-143
+  dsc_file {'Toolbox Directory':
+    dsc_ensure          => 'present',
+    dsc_type            => 'Directory',
+    dsc_destinationpath => 'c:\\Toolbox',
+  }
 }
