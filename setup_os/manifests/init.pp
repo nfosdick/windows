@@ -30,4 +30,11 @@ class setup_os {
     dsc_type            => 'Directory',
     dsc_destinationpath => 'c:\\Toolbox',
   }
+
+  # https://lark-it.atlassian.net/browse/FCB-145
+  dsc_file {'Toolbox PowerShellScripts Directory':
+    dsc_ensure          => 'present',
+    dsc_type            => 'Directory',
+    dsc_destinationpath => 'c:\\Toolbox\\PowerShellScripts',
+  }
 }
