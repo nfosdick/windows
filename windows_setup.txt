@@ -24,3 +24,5 @@ cd "C:\ProgramData\PuppetLabs\code\modules"
 git clone https://github.com/puppetlabs/puppetlabs-dsc.git
 git clone https://github.com/puppetlabs/puppetlabs-reboot.git
 git clone https://github.com/nfosdick/windows.git
+$modulepath="C:/ProgramData/PuppetLabs/code/environments/production/modules;C:/ProgramData/PuppetLabs/code/modules;C:/ProgramData/PuppetLabs/code/modules/windows"
+puppet config set modulepath --section master $modulepath

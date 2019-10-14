@@ -38,4 +38,11 @@ class setup_os {
     dsc_destinationpath => 'c:\\Toolbox\\PowerShellScripts',
     require             => Dsc_file[ 'Toolbox Directory' ],
   }
+
+  # https://lark-it.atlassian.net/browse/FCB-149
+  dsc_file {'InstallLogs Directory':
+    dsc_ensure          => 'present',
+    dsc_type            => 'Directory',
+    dsc_destinationpath => 'c:\\InstallLogs',
+  }
 }
