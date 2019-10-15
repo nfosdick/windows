@@ -37,8 +37,9 @@ class setup_os {
   # https://superuser.com/questions/788347/how-do-i-disable-multicast-on-the-tcp-ip-stack-for-windows
   dsc_registry {'Disable Multicast':
     dsc_ensure    => 'Present',
-    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters',
-    dsc_valuename => 'IGMPLevel',
+    #dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT" -Value 0
+    dsc_valuename => 'DNSCLIENT',
     dsc_valuetype => 'Dword',
     dsc_valuedata => '0',
   }
