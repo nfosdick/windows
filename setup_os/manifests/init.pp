@@ -38,8 +38,8 @@ class setup_os {
   dsc_registry {'Disable Multicast':
     dsc_ensure    => 'Present',
     #dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters',
-    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT" -Value 0
-    dsc_valuename => 'DNSCLIENT',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT",
+    dsc_valuename => 'EnableMulticast',
     dsc_valuetype => 'Dword',
     dsc_valuedata => '0',
   }
