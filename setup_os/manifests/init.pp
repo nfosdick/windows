@@ -10,9 +10,20 @@ class setup_os {
     dsc_force     => true,
   }
 
-  dsc_registry {'Disable TLS 1.0':
+  # https://lark-it.atlassian.net/browse/FCB-161
+  # https://docs.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings
+  dsc_registry {'Server Disable TLS 1.0':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server',
+    dsc_valuename => 'Enabled',
+    dsc_valuedata => '0',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
+
+  dsc_registry {'Client Disable TLS 1.0':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Client',
     dsc_valuename => 'Enabled',
     dsc_valuedata => '0',
     dsc_valuetype => 'Dword',
