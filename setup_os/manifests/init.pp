@@ -15,6 +15,7 @@ class setup_os {
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters',
     dsc_valuename => 'IGMPLevel',
+    dsc_valuetype => 'Dword',
     dsc_valuedata => '0',
   }
 
