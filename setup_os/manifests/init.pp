@@ -30,6 +30,7 @@ class setup_os {
     dsc_force     => true,
   }
 
+  # https://lark-it.atlassian.net/browse/FCB-156
   dsc_registry {'WMI Standalone':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost',
@@ -45,7 +46,7 @@ class setup_os {
   dsc_registry {'Disable Multicast':
     dsc_ensure    => 'Present',
     #dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters',
-    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT",
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
     dsc_valuename => 'EnableMulticast',
     dsc_valuetype => 'Dword',
     dsc_valuedata => '0',
