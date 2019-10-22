@@ -30,6 +30,13 @@ class setup_os {
     dsc_force     => true,
   }
 
+  dsc_registry {'WMI Standalone':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost',
+    dsc_valuename => 'winmgmt',
+    dsc_valuedata => 'winmgmt',
+  }
+
   # https://lark-it.atlassian.net/browse/FCB-158
   # https://www.microsoftpressstore.com/articles/article.aspx?p=2217263&seqNum=8
   # https://docs.microsoft.com/en-us/powershell/module/nettcpip/set-netipv4protocol?view=win10-ps
