@@ -61,6 +61,37 @@ class windows {
     dsc_valuedata => '0',
   }
 
+  dsc_registry {'EnableDevolutionLevelControl':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
+    dsc_valuename => 'EnableDevolutionLevelControl',
+    dsc_valuetype => 'Dword',
+    dsc_valuedata => '1',
+  }
+
+  dsc_registry {'DomainNameDevolutionLevel':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
+    dsc_valuename => 'DomainNameDevolutionLevel',
+    dsc_valuetype => 'Dword',
+    dsc_valuedata => '2',
+  }
+
+  dsc_registry {'UseDomainNameDevolution':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
+    dsc_valuename => 'UseDomainNameDevolution',
+    dsc_valuetype => 'Dword',
+    dsc_valuedata => '1',
+  }
+
+  dsc_registry {'SearchList':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
+    dsc_valuename => 'SearchList'
+    dsc_valuedata => 'fcpd.fcbint.net,fcqa.fcbint.net,fcb.com,aaa.com'
+  }
+
   # https://lark-it.atlassian.net/browse/FCB-141
   dsc_file {'PCW Directory':
     dsc_ensure          => 'present',
