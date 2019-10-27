@@ -148,6 +148,6 @@ class windows {
   exec { 'Enable WinRM':
     command   => 'winrm qc -quiet',
     unless    => 'if(winrm enumerate winrm/config/listener|Select-String 5985){ exit 0 }else{ exit 1 }',
-    provider  => powershell,
+    provider  => windows,
   }
 }
