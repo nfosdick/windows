@@ -17,7 +17,7 @@ $wc = New-Object net.webclient
 $wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
 $wc = New-Object net.webclient
 msiexec /qn /norestart /i $file
-msiexec /qn /norestart /i $file /l*v install.txt
+msiexec /qn /norestart /i "C:/${parentdir}/${file}" /l*v install.txt
 sleep 30
 refreshenv
 
@@ -25,5 +25,4 @@ cd "C:\ProgramData\PuppetLabs\code\modules"
 git clone https://github.com/puppetlabs/puppetlabs-dsc.git
 git clone https://github.com/puppetlabs/puppetlabs-reboot.git
 git clone https://github.com/nfosdick/windows.git
-$modulepath="C:/ProgramData/PuppetLabs/code/environments/production/modules;C:/ProgramData/PuppetLabs/code/modules;C:/ProgramData/PuppetLabs/code/modules/windows"
-puppet config set modulepath --section master $modulepath
+cd "C:\ProgramData\PuppetLabs\code\modules\windows\manfests"

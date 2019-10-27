@@ -96,4 +96,21 @@ class windows {
     dsc_type            => 'Directory',
     dsc_destinationpath => 'c:\\InstallLogs',
   }
+
+  # https://lark-it.atlassian.net/browse/FCB-160
+  dsc_registry {'Disable Server Manager at Startup Login: DoNotOpenServerManagerAtLogin':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager',
+    dsc_valuename => 'DoNotOpenServerManagerAtLogon',
+    dsc_valuetype => 'Dword',
+    dsc_valuedata => '1',
+  }
+
+  dsc_registry {'Disable Server Manager at Startup Login: DoNotOpenInitialConfigurationTasksAtLogon':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager\Oobe',
+    dsc_valuename => 'DoNotOpenInitialConfigurationTasksAtLogon',
+    dsc_valuetype => 'Dword',
+    dsc_valuedata => '1',
+  }
 }
