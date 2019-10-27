@@ -17,6 +17,7 @@ $wc = New-Object net.webclient
 $wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
 $wc = New-Object net.webclient
 msiexec /qn /norestart /i $file
+msiexec /qn /norestart /i $file /l*v install.txt
 sleep 30
 refreshenv
 

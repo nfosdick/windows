@@ -30,6 +30,16 @@ class windows {
     dsc_force     => true,
   }
 
+  # https://lark-it.atlassian.net/browse/FCB-162
+  dsc_registry {'Disable Triple DES 168':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\Triple DES 168',
+    dsc_valuename => 'Enabled',
+    dsc_valuedata => '0',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
+
   # https://lark-it.atlassian.net/browse/FCB-156
   dsc_registry {'WMI Standalone':
     dsc_ensure    => 'Present',
@@ -45,7 +55,6 @@ class windows {
   # https://superuser.com/questions/788347/how-do-i-disable-multicast-on-the-tcp-ip-stack-for-windows
   dsc_registry {'Disable Multicast':
     dsc_ensure    => 'Present',
-    #dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
     dsc_valuename => 'EnableMulticast',
     dsc_valuetype => 'Dword',
