@@ -88,8 +88,8 @@ class windows {
   dsc_registry {'SearchList':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSCLIENT',
-    dsc_valuename => 'SearchList'
-    dsc_valuedata => 'fcpd.fcbint.net,fcqa.fcbint.net,fcb.com,aaa.com'
+    dsc_valuename => 'SearchList',
+    dsc_valuedata => 'fcpd.fcbint.net,fcqa.fcbint.net,fcb.com,aaa.com',
   }
 
   # https://lark-it.atlassian.net/browse/FCB-141
