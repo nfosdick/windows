@@ -150,4 +150,12 @@ class windows {
     unless    => 'if(winrm enumerate winrm/config/listener|Select-String 5985){ exit 0 }else{ exit 1 }',
     provider  => windows,
   }
+
+  exec { 'Enable WinRM':
+    command   => 'winrm qc -quiet',
+    unless    => 'powershell -executionpolicy remotesigned "if(winrm enumerate winrm/config/listener|Select-String 5985){ exit 0 }else{ exit 1 }"',
+    path      => ['c:/windows/system32'],
+    provider  => windows,
+  }
 }
+
