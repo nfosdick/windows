@@ -2,6 +2,7 @@
 # https://downloads.puppetlabs.com/windows/puppet5/
 #msiexec /qn /norestart /i $file
 #msiexec.exe /qn /norestart /i "C:/${parentdir}/${file}" /l*v install.txt
+#Start-Process msiexec.exe -Wait -ArgumentList '/I C:\larktemp\puppet-agent-5.5.16-x64.msi /quiet'
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).path)\..\.."
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -18,8 +19,8 @@ Set-Location "c:\${parentdir}"
 $wc = New-Object net.webclient
 $wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
 $wc = New-Object net.webclient
-Start-Process msiexec.exe -Wait -ArgumentList '/I C:\larktemp\puppet-agent-5.5.16-x64.msi /quiet'
-sleep 30
+$install_file="C:\${parentdir}\${file}"
+Start-Process msiexec.exe -Wait -ArgumentList "/I ${install_file} /quiet"
 refreshenv
 
 cd "C:\ProgramData\PuppetLabs\code\modules"

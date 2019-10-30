@@ -1,10 +1,10 @@
 class windows {
   class{ 'windows::directories':
-    before => Exec[ 'Enable WinRM' ],
+    require => Exec[ 'Enable WinRM' ],
   }
 
   class{ 'windows::registry':
-    before => Exec[ 'Enable WinRM' ],
+    require => Exec[ 'Enable WinRM' ],
   }
   
   # https://lark-it.atlassian.net/browse/FCB-159
