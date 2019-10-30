@@ -17,7 +17,7 @@ class windows {
   }
 
   $vm_tools_dir='c:\temp\VM-Tools'
-  exec { "Empty $[vm_tools_dir} Folder":
+  exec { "Remove ${vm_tools_dir} Folder":
     command  => "Remove-Item –path ${vm_tools_dir} -force -recurse",
     onlyif   => "Test-Path ${vm_tools_dir}",
     provider => powershell,
