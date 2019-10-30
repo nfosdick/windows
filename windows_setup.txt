@@ -26,7 +26,6 @@ cd "C:\ProgramData\PuppetLabs\code\modules"
 git clone https://github.com/puppetlabs/puppetlabs-dsc.git
 git clone https://github.com/puppetlabs/puppetlabs-reboot.git
 git clone https://github.com/nfosdick/windows.git
-#git clone https://github.com/puppetlabs/puppetlabs-powershell.git
 puppet module install puppetlabs-powershell --version 2.3.0
 git clone https://github.com/puppetlabs/ruby-pwsh.git
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
