@@ -1,4 +1,6 @@
 class windows {
+  include windows::vmware
+
   class{ 'windows::directories':
     require => Exec[ 'Enable WinRM' ],
   }
@@ -14,12 +16,5 @@ class windows {
     unless    => 'if(winrm enumerate winrm/config/listener|Select-String 5985){ exit 0 }else{ exit 1 }',  
     path      => ['c:/windows/system32'],
     provider  => powershell,
-  }
-
-  $vm_tools_dir='c:\temp\VM-Tools'
-  exec { "Remove ${vm_tools_dir} Folder":
-    command  => "Remove-Item –path ${vm_tools_dir} -force -recurse",
-    onlyif   => "if(Test-Path ${vm_tools_dir}){ exit 0 }else{ exit 1 }",
-    provider => powershell,
   }
 }
