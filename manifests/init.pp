@@ -1,6 +1,11 @@
 class windows {
-  include windows::directories
-  include windows::registry
+  class{ 'windows::directories':
+    before => Exec[ 'Enable WinRM' ],
+  }
+
+  class{ 'windows::registry':
+    before => Exec[ 'Enable WinRM' ],
+  }
   
   # https://lark-it.atlassian.net/browse/FCB-159
   exec { 'Enable WinRM':
