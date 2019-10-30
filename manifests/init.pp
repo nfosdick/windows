@@ -16,10 +16,10 @@ class windows {
     provider  => powershell,
   }
 
-  exec { 'Empty C:\Temp\VM-Tools Folder':
-    command    => 'Remove-Item –path c:\temp\VM-Tools -force -recurse',
-#    unless    => 'if(winrm enumerate winrm/config/listener|Select-String 5985){ exit 0 }else{ exit 1 }',
-#    path      => ['c:/windows/system32'],
-    provider  => powershell,
+  $vm_tools_dir='c:\temp\VM-Tools'
+  exec { "Empty $[vm_tools_dir} Folder":
+    command  => "Remove-Item –path ${vm_tools_dir} -force -recurse",
+    unless   => "Test-Path ${vm_tools_dir}",
+    provider => powershell,
   }
 }
