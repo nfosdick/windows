@@ -1,5 +1,5 @@
 class windows {
-  #include windows::vmware
+  include windows::vmware
 
   class{ 'windows::directories':
     require => Exec[ 'Enable WinRM' ],
