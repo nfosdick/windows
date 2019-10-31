@@ -6,6 +6,8 @@ class windows::vmware {
   exec { 'Copy VMware Tools to C:\Temp':
     command  => "Copy-Item -Path \"${source_dir}\" -Destination \"${vm_tools_dir}\" -Recurse",
     provider => powershell,
+    #onlyif or unless will be needed to check to see if vmware tools is installed already here.  
+    #The azure vm would not let me install vmware tools as it wasn't a vmware vm.  
   }   
 
   # https://lark-it.atlassian.net/browse/FCB-153
