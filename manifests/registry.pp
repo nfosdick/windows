@@ -108,4 +108,5 @@ class windows::registry {
     dsc_valuetype => 'Dword',
     dsc_valuedata => '1',
   }
+
 }
