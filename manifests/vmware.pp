@@ -4,7 +4,7 @@ class windows::vmware {
  
   # https://lark-it.atlassian.net/browse/FCB-152
   exec { 'Copy VMware Tools to C:\Temp':
-    command  => "Copy-Item -Path \"${source_dir}\" -Destination \"${vm_tools_dir}\" -Recurse',
+    command  => "Copy-Item -Path \"${source_dir}\" -Destination \"${vm_tools_dir}\" -Recurse",
     provider => powershell,
   }   
 
