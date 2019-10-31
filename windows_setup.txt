@@ -3,6 +3,7 @@
 #msiexec /qn /norestart /i $file
 #msiexec.exe /qn /norestart /i "C:/${parentdir}/${file}" /l*v install.txt
 #Start-Process msiexec.exe -Wait -ArgumentList '/I C:\larktemp\puppet-agent-5.5.16-x64.msi /quiet'
+# c:\Temp\VM-Tools\setup64.exe /S /v"/qn REBOOT=R"
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).path)\..\.."
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -30,4 +31,15 @@ git clone https://github.com/nfosdick/windows.git
 puppet module install puppetlabs-powershell --version 2.3.0
 git clone https://github.com/puppetlabs/ruby-pwsh.git
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
+
+https://s3.amazonaws.com/weslson.com/vmware.zip
+
+$file="vmware.zip"
+$url="https://s3.amazonaws.com/weslson.com/$file"
+$wc = New-Object net.webclient
+$wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
+$wc = New-Object net.webclient
+Expand-Archive -Path "C:\${parentdir}\${file}" -DestinationPath C:\${parentdir}	
+Move-Item -Path "C:\${parentdir}\VMWare Tools" -Destination "C:\Temp\VM-Tools"
+
 puppet apply .\test.pp
