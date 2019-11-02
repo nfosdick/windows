@@ -2,7 +2,7 @@ class windows::create_copy(
   $logoutput = 'on_failure',
 ){
   # https://lark-it.atlassian.net/browse/FCB-141
-  $pcw_source_dir      = 'c:/larktemp'
+  $pcw_source_dir      = 'c:/larktemp/*'
   $pcw_destination_dir = 'c:/PCW'
   dsc_file {'PCW Directory':
     dsc_ensure          => 'present',
