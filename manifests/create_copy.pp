@@ -124,7 +124,7 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-165
   exec { 'Run CIS Security Script':
     #command   => "start-process \"cmd.exe\" \"/c ${infosec_destination_dir}/${infosec_file}\"",
-    command   => "${infosec_destination_dir}/InfoSec64.ps1',
+    command   => "${infosec_destination_dir}/InfoSec64.ps1",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
