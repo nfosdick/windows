@@ -120,12 +120,12 @@ class windows::create_copy(
     require   => Exec[ 'Copy Install' ],
   }
 
+  notify{"Nick ${infosec_destination_dir}/${infosec_file}":}
   # https://lark-it.atlassian.net/browse/FCB-165
   exec { 'Run CIS Security Script':
     #command   => "start-process \"cmd.exe\" \"/c ${infosec_destination_dir}/${infosec_file}\"",
     command   => "${infosec_destination_dir}/${infosec_file};Exit 0",
     provider  => powershell,
-    path      => ['c:/windows/system32'],
     #logoutput => $logoutput,
     logoutput => true,
     require   => Exec[ "Copy ${infosec_file}" ],
