@@ -108,12 +108,23 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-151
   $infosec_file            = 'InfoSec64.cmd'
   $infosec_source_dir      = "${install_destination_dir}/scripts/${infosec_file}"
+  $infosec_destination_dir = 'c:/windows/security'
   exec { "Copy ${infosec_file}":
-    command   => "Copy-Item -Path \"${infosec_source_dir}\" -Destination \"c:/windows/security/${infosec_file}\" -Force",
+    command   => "Copy-Item -Path \"${infosec_source_dir}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force",
     provider  => powershell,
     logoutput => $logoutput,
-    unless    => "if(Test-Path c:/windows/security/${infosec_file}}){ exit 0 }else{ exit 1 }",
+    unless    => "if(Test-Path ${infosec_destination_dir}/${infosec_file}}){ exit 0 }else{ exit 1 }",
     require   => Exec[ 'Copy Install' ],
   }
 
+  # https://lark-it.atlassian.net/browse/FCB-165
+  exec { 'Run CIS Security Script':
+    command   => "${infosec_destination_dir}/${infosec_file}",
+    provider  => powershell,
+    logoutput => $logoutput,
+    require   => Exec[ "Copy ${infosec_file}" ],
+    # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
+    # Typically there is some flag here to tell if this has been run successfully
+    # I don't have source files here
+  }
 }
