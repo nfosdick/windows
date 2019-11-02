@@ -108,12 +108,12 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-151
   $infosec_file            = 'InfoSec64.cmd'
-  $infosec_source_file      = "${install_destination_dir}/larktemp/scripts/${infosec_file}"
+  $infosec_source_file     = "${install_destination_dir}/larktemp/scripts/${infosec_file}"
   $infosec_destination_dir = 'c:/windows/security'
   $infosec_copy_cmd        = "Copy-Item -Path \"${infosec_source_file}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force"
-  notify{"Nick ${infosec_copy_cmd}":}
+  #notify{"infosec cmd: ${infosec_copy_cmd}":}
   exec { "Copy ${infosec_file}":
-    command   => "Copy-Item -Path \"${infosec_source_file}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force",
+    command   => $infosec_copy_cmd,
     provider  => powershell,
     logoutput => $logoutput,
     unless    => "if(Test-Path ${infosec_destination_dir}/${infosec_file}}){ exit 0 }else{ exit 1 }",
@@ -122,7 +122,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-165
   exec { 'Run CIS Security Script':
-    command   => "${infosec_destination_dir}/${infosec_file}",
+    command   => "${infosec_destination_dir}/${infosec_file}; Exit 0",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
