@@ -25,7 +25,8 @@ class windows::create_copy(
   exec { 'Run SEO Config Script':
     command   => "${pcw_destination_dir}/pcw-set.cmd",
     provider  => powershell,
-    logoutput => $logoutput,
+    #logoutput => $logoutput,
+    logoutput => true,
     require   => Exec[ 'Copy PCW' ],
     # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
     # Typically there is some flag here to tell if this has been run successfully
