@@ -25,7 +25,7 @@ class windows::create_copy(
   dsc_file {'Temp Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
-    dsc_destinationpath => 'c:\\Temp',
+    dsc_destinationpath => 'c:/Temp',
   }
 
   #https://lark-it.atlassian.net/browse/FCB-143
@@ -58,6 +58,7 @@ class windows::create_copy(
     require             => Dsc_file[ 'Toolbox Directory' ],
   }
 
+  # https://lark-it.atlassian.net/browse/FCB-146
   exec { 'Copy powershellscripts':
     command   => "Copy-Item -Path \"${powershell_source_dir}\" -Destination \"${powershell_destination_dir}\" -Recurse -Force",
     provider  => powershell,
@@ -71,6 +72,13 @@ class windows::create_copy(
   dsc_file {'InstallLogs Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
-    dsc_destinationpath => 'c:\\InstallLogs',
+    dsc_destinationpath => 'c:/InstallLogs',
+  }
+
+  # https://lark-it.atlassian.net/browse/FCB-147
+  dsc_file {'Install Directory':
+    dsc_ensure          => 'present',
+    dsc_type            => 'Directory',
+    dsc_destinationpath => 'c:/Install',
   }
 }
