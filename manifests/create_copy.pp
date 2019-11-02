@@ -62,7 +62,7 @@ class windows::create_copy(
     command   => "Copy-Item -Path \"${powershell_source_dir}\" -Destination \"${powershell_destination_dir}\" -Recurse -Force",
     provider  => powershell,
     logoutput => $logoutput,
-    require   => Dsc_file[ 'sowershellscripts Directory' ],
+    require   => Dsc_file[ 'powershellscripts Directory' ],
     # onlyif or unless "if(command to run if to check if powershellscript are already installed){ exit 0 }else{ exit 1 }",
     # I don't have source files here
   }
