@@ -76,9 +76,21 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-147
+  $install_source_dir      = 'c:/larktemp/VMWare Tools'
+  $install_destination_dir = 'c:/Install'
   dsc_file {'Install Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
-    dsc_destinationpath => 'c:/Install',
+    dsc_destinationpath => $install_destination_dir,
+  }
+
+  # https://lark-it.atlassian.net/browse/FCB-148
+  exec { 'Copy Install':
+    command   => "Copy-Item -Path \"${install_source_dir}\" -Destination \"${install_destination_dir}\" -Recurse -Force",
+    provider  => powershell,
+    logoutput => $logoutput,
+    require   => Dsc_file[ 'Install Directory' ],
+    # onlyif or unless "if(command to run if to check if Install files already installed){ exit 0 }else{ exit 1 }",
+    # I don't have source files here
   }
 }
