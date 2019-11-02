@@ -41,3 +41,6 @@ Expand-Archive -Path "C:\${parentdir}\${file}" -DestinationPath C:\${parentdir}
 Move-Item -Path "C:\${parentdir}\VMWare Tools" -Destination "C:\Temp\VM-Tools"
 
 puppet apply .\test.pp
+
+mkdir c:\Install\scripts
+echo "Hello" > c:\Install\scripts\InfoSec64.cmd

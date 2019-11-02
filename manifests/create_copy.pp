@@ -85,6 +85,7 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-148
+  
   exec { 'Copy Install':
     command   => "Copy-Item -Path \"${install_source_dir}\" -Destination \"${install_destination_dir}\" -Recurse -Force",
     provider  => powershell,
@@ -92,5 +93,13 @@ class windows::create_copy(
     require   => Dsc_file[ 'Install Directory' ],
     # onlyif or unless "if(command to run if to check if Install files already installed){ exit 0 }else{ exit 1 }",
     # I don't have source files here
+  }
+
+  # https://lark-it.atlassian.net/browse/FCB-151
+  exec { 'Copy InfoSec64.cmd':
+    command   => "Copy-Item -Path \"${install_source_dir}/scripts/InfoSec64.cmd\" -Destination \"c:/windows/security/\" -Force",
+    provider  => powershell,
+    logoutput => $logoutput,
+    require   => Exec[ 'Copy Install' ],
   }
 }
