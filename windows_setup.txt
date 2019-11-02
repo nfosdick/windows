@@ -22,6 +22,7 @@ $wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
 $wc = New-Object net.webclient
 $install_file="C:\${parentdir}\${file}"
 Start-Process msiexec.exe -Wait -ArgumentList "/I ${install_file} /quiet"
+sleep 30
 refreshenv
 
 cd "C:\ProgramData\PuppetLabs\code\modules"
@@ -37,8 +38,8 @@ $url="https://s3.amazonaws.com/weslson.com/$file"
 $wc = New-Object net.webclient
 $wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
 $wc = New-Object net.webclient
-Expand-Archive -Path "C:\${parentdir}\${file}" -DestinationPath C:\${parentdir}	
-Move-Item -Path "C:\${parentdir}\VMWare Tools" -Destination "C:\Temp\VM-Tools"
+Expand-Archive -Path "C:\${parentdir}\${file}" -DestinationPath C:\${parentdir}	-Force
+Move-Item -Path "C:\${parentdir}\VMWare Tools" -Destination "C:\Temp\VM-Tools" -Force
 mkdir "c:\${parentdir}\scripts"
 echo "echo %PATH%" > "c:\${parentdir}\scripts\InfoSec64.cmd"
 echo "echo %PATH%" > "c:\${parentdir}\pcw-set.cmd"

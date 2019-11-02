@@ -107,11 +107,10 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-151
   $infosec_file            = 'InfoSec64.cmd'
-  #$infosec_source_dir      = "${install_destination_dir}/scripts/${infosec_file}"
-  $infosec_source_dir      = "${install_destination_dir}/scripts"
+  $infosec_source_file      = "${install_destination_dir}/scripts/${infosec_file}"
   $infosec_destination_dir = 'c:/windows/security'
   exec { "Copy ${infosec_file}":
-    command   => "Copy-Item -Path \"${infosec_source_dir}/${infosec_file}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force",
+    command   => "Copy-Item -Path \"${infosec_source_file}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force",
     provider  => powershell,
     logoutput => $logoutput,
     unless    => "if(Test-Path ${infosec_destination_dir}/${infosec_file}}){ exit 0 }else{ exit 1 }",
