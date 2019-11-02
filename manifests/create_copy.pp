@@ -125,6 +125,7 @@ class windows::create_copy(
     #command   => "start-process \"cmd.exe\" \"/c ${infosec_destination_dir}/${infosec_file}\"",
     command   => "${infosec_destination_dir}/${infosec_file};Exit 0",
     provider  => powershell,
+    path      => ['c:/windows/system32'],
     #logoutput => $logoutput,
     logoutput => true,
     require   => Exec[ "Copy ${infosec_file}" ],
