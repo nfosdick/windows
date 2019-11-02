@@ -109,7 +109,7 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-151
-  $infosec_file            = 'InfoSec64.cmd'
+  $infosec_file            = 'InfoSec64.ps1'
   $infosec_source_file     = "${install_destination_dir}/larktemp/scripts/${infosec_file}"
   $infosec_destination_dir = 'c:/windows/security'
   $infosec_copy_cmd        = "Copy-Item -Path \"${infosec_source_file}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force"
@@ -126,7 +126,7 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-165
   exec { 'Run CIS Security Script':
     #command   => "start-process \"cmd.exe\" \"/c ${infosec_destination_dir}/${infosec_file}\"",
-    command   => "${infosec_destination_dir}/InfoSec64.ps1",
+    command   => "${infosec_destination_dir}/${infosec_file}",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
