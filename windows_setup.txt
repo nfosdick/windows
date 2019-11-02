@@ -32,8 +32,6 @@ puppet module install puppetlabs-powershell --version 2.3.0
 git clone https://github.com/puppetlabs/ruby-pwsh.git
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
 
-https://s3.amazonaws.com/weslson.com/vmware.zip
-
 $file="vmware.zip"
 $url="https://s3.amazonaws.com/weslson.com/$file"
 $wc = New-Object net.webclient

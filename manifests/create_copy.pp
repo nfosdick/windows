@@ -1,7 +1,7 @@
 class windows::create_copy {
   # https://lark-it.atlassian.net/browse/FCB-141
-  $pcw_source_dir      = 'c:/larktemp/VMWare Tools',
-  $pcw_destination_dir = 'c:/PCW',
+  $pcw_source_dir      = 'c:/larktemp/VMWare Tools'
+  $pcw_destination_dir = 'c:/PCW'
   dsc_file {'PCW Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
