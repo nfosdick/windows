@@ -51,14 +51,14 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-145
   $powershell_source_dir      = 'c:/larktemp/VMWare Tools'
   $powershell_destination_dir = "${toolbox_destination_dir}/powershellscripts"
-  dsc_file {'sowershellscripts Directory':
+  dsc_file {'poswershellscripts Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
     dsc_destinationpath => $powershell_destination_dir,
     require             => Dsc_file[ 'Toolbox Directory' ],
   }
 
-  exec { 'Copy Toolbox':
+  exec { 'Copy powershellscripts':
     command   => "Copy-Item -Path \"${powershell_source_dir}\" -Destination \"${powershell_destination_dir}\" -Recurse -Force",
     provider  => powershell,
     logoutput => $logoutput,
