@@ -1,13 +1,13 @@
 class windows {
-  include windows::vmware
+  #include windows::vmware
 
   class{ 'windows::create_copy':
     require => Exec[ 'Enable WinRM' ],
   }
 
-  class{ 'windows::registry':
-    require => Exec[ 'Enable WinRM' ],
-  }
+  #class{ 'windows::registry':
+  #  require => Exec[ 'Enable WinRM' ],
+  #}
   
   # https://lark-it.atlassian.net/browse/FCB-159
   # https://support.microsoft.com/en-us/help/974504/the-windows-remote-manager-winrm-service-does-not-start-after-you-unin
