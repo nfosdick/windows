@@ -97,9 +97,10 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-151
   exec { 'Copy InfoSec64.cmd':
-    command   => "Copy-Item -Path \"${install_source_dir}/scripts/InfoSec64.cmd\" -Destination \"c:/windows/security/InfoSec64.cmd\" -Force",
+    command   => "Copy-Item -Path \"${install_destination_dir}/scripts/InfoSec64.cmd\" -Destination \"c:/windows/security/InfoSec64.cmd\" -Force",
     provider  => powershell,
     logoutput => $logoutput,
     require   => Exec[ 'Copy Install' ],
   }
+
 }
