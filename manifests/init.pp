@@ -1,7 +1,7 @@
 class windows {
   include windows::vmware
 
-  class{ 'windows::directories':
+  class{ 'windows::create_copy':
     require => Exec[ 'Enable WinRM' ],
   }
 
