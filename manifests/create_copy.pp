@@ -76,7 +76,7 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-147
-  $install_source_dir      = 'c:/larktemp/VMWare Tools'
+  $install_source_dir      = 'c:/larktemp'
   $install_destination_dir = 'c:/Install'
   dsc_file {'Install Directory':
     dsc_ensure          => 'present',
@@ -85,7 +85,6 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-148
-  
   exec { 'Copy Install':
     command   => "Copy-Item -Path \"${install_source_dir}\" -Destination \"${install_destination_dir}\" -Recurse -Force",
     provider  => powershell,
@@ -96,10 +95,13 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-151
-  exec { 'Copy InfoSec64.cmd':
-    command   => "Copy-Item -Path \"${install_destination_dir}/scripts/InfoSec64.cmd\" -Destination \"c:/windows/security/InfoSec64.cmd\" -Force",
+  $infosec_file            = 'InfoSec64.cmd'
+  $infosec_source_dir      = "${install_destination_dir}/scripts/${infosec_file}"
+  exec { "Copy ${infosec_file}":
+    command   => "Copy-Item -Path \"${infosec_source_dir}\" -Destination \"c:/windows/security/${infosec_file}\" -Force",
     provider  => powershell,
     logoutput => $logoutput,
+    onlyif    => "if(Test-Path c:/windows/security/${infosec_file}}){ exit 0 }else{ exit 1 }",
     require   => Exec[ 'Copy Install' ],
   }
 
