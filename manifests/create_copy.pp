@@ -101,7 +101,7 @@ class windows::create_copy(
     command   => "Copy-Item -Path \"${infosec_source_dir}\" -Destination \"c:/windows/security/${infosec_file}\" -Force",
     provider  => powershell,
     logoutput => $logoutput,
-    onlyif    => "if(Test-Path c:/windows/security/${infosec_file}}){ exit 0 }else{ exit 1 }",
+    unless    => "if(Test-Path c:/windows/security/${infosec_file}}){ exit 0 }else{ exit 1 }",
     require   => Exec[ 'Copy Install' ],
   }
 
