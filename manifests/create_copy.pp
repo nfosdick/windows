@@ -108,7 +108,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-151
   $infosec_file            = 'InfoSec64.cmd'
-  $infosec_source_file      = "${install_destination_dir}/scripts/${infosec_file}"
+  $infosec_source_file      = "${install_destination_dir}/larktemp/scripts/${infosec_file}"
   $infosec_destination_dir = 'c:/windows/security'
   $infosec_copy_cmd        = "Copy-Item -Path \"${infosec_source_file}\" -Destination \"${infosec_destination_dir}/${infosec_file}\" -Force"
   notify{"Nick ${infosec_copy_cmd}":}
