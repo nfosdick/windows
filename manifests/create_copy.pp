@@ -23,7 +23,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-164
   exec { 'Run SEO Config Script':
-    command   => "${pcw_destination_dir}/pcw-set.cmd",
+    command   => "${pcw_destination_dir}/pcw-set.cmd;Exit 0",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
@@ -122,15 +122,15 @@ class windows::create_copy(
 
   notify{"Nick ${infosec_destination_dir}/${infosec_file}":}
   # https://lark-it.atlassian.net/browse/FCB-165
-  exec { 'Run CIS Security Script':
-    #command   => "start-process \"cmd.exe\" \"/c ${infosec_destination_dir}/${infosec_file}\"",
-    command   => "${infosec_destination_dir}/InfoSec64.ps1",
-    provider  => powershell,
-    #logoutput => $logoutput,
-    logoutput => true,
-    require   => Exec[ "Copy ${infosec_file}" ],
-    # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
-    # Typically there is some flag here to tell if this has been run successfully
-    # I don't have source files here
-  }
+  #exec { 'Run CIS Security Script':
+  #  #command   => "start-process \"cmd.exe\" \"/c ${infosec_destination_dir}/${infosec_file}\"",
+  #  command   => "${infosec_destination_dir}/InfoSec64.ps1",
+  #  provider  => powershell,
+  #  #logoutput => $logoutput,
+  #  logoutput => true,
+  #  require   => Exec[ "Copy ${infosec_file}" ],
+  #  # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
+  #  # Typically there is some flag here to tell if this has been run successfully
+  #  # I don't have source files here
+  #}
 }
