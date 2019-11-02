@@ -122,7 +122,8 @@ class windows::create_copy(
   exec { 'Run CIS Security Script':
     command   => "${infosec_destination_dir}/${infosec_file}",
     provider  => powershell,
-    logoutput => $logoutput,
+    #logoutput => $logoutput,
+    logoutput => true,
     require   => Exec[ "Copy ${infosec_file}" ],
     # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
     # Typically there is some flag here to tell if this has been run successfully
