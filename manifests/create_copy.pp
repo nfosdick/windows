@@ -2,7 +2,7 @@ class windows::create_copy(
   $logoutput = 'on_failure',
 ){
   # https://lark-it.atlassian.net/browse/FCB-141
-  $pcw_source_dir      = 'c:/larktemp/VMWare Tools'
+  $pcw_source_dir      = 'c:/larktemp/'
   $pcw_destination_dir = 'c:/PCW'
   dsc_file {'PCW Directory':
     dsc_ensure          => 'present',
@@ -18,6 +18,17 @@ class windows::create_copy(
     require   => Dsc_file[ 'PCW Directory' ],
     # onlyif or unless "if(command to run if to check if PCW tools is installed){ exit 0 }else{ exit 1 }",
     # onlyif or unless will be needed to check to see if PCW tools is installed already here.
+    # I don't have source files here
+  }
+
+  # https://lark-it.atlassian.net/browse/FCB-164
+  exec { 'Run SEO Config Script':
+    command   => "${pcw_destination_dir}/pcw-set.cmd"
+    provider  => powershell,
+    logoutput => $logoutput,
+    require   => Exec[ 'Copy PCW':
+    # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
+    # Typically there is some flag here to tell if this has been run successfully
     # I don't have source files here
   }
 
