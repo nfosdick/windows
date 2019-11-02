@@ -3,7 +3,7 @@ class windows::create_copy(
 ){
   # https://lark-it.atlassian.net/browse/FCB-141
   $pcw_source_dir      = 'c:/larktemp/scripts'
-  $pcw_destination_dir = 'c:/PCW'
+  $pcw_destination_dir = 'c:\\PCW'
   dsc_file {'PCW Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
@@ -23,7 +23,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-164
   exec { 'Run SEO Config Script':
-    command   => "c:\\POW\\pcw-set.cmd",
+    command   => "${pcw_destination_dir}\\pcw-set.cmd",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
