@@ -23,7 +23,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-164
   exec { 'Run SEO Config Script':
-    command   => "${pcw_destination_dir}/pcw-set.cmd;Exit 0",
+    command   => "c:\\POW\\pcw-set.cmd",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
