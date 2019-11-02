@@ -13,7 +13,7 @@ class windows::create_copy {
     command   => "Copy-Item -Path \"${pcw_source_dir}\" -Destination \"${$pcw_destination_dir}\" -Recurse -Force",
     provider  => powershell,
     logoutput => $logoutput,
-    require   => File[ 'PCW Directory' ],
+    require   => Dsc_file[ 'PCW Directory' ],
     # onlyif or unless "if(command to run if to check if vmware tools is installed){ exit 0 }else{ exit 1 }",
     #onlyif or unless will be needed to check to see if vmware tools is installed already here.
     #The azure vm would not let me install vmware tools as it wasn't a vmware vm.
