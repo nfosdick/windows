@@ -49,11 +49,22 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-145
-  dsc_file {'Toolbox PowerShellScripts Directory':
+  $powershell_source_dir      = 'c:/larktemp/VMWare Tools'
+  $powershell_destination_dir = "${toolbox_destination_dir}/powershellscripts"
+  dsc_file {'sowershellscripts Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
-    dsc_destinationpath => 'c:\\Toolbox\\PowerShellScripts',
+    dsc_destinationpath => $powershell_destination_dir,
     require             => Dsc_file[ 'Toolbox Directory' ],
+  }
+
+  exec { 'Copy Toolbox':
+    command   => "Copy-Item -Path \"${powershell_source_dir}\" -Destination \"${powershell_destination_dir}\" -Recurse -Force",
+    provider  => powershell,
+    logoutput => $logoutput,
+    require   => Dsc_file[ 'sowershellscripts Directory' ],
+    # onlyif or unless "if(command to run if to check if powershellscript are already installed){ exit 0 }else{ exit 1 }",
+    # I don't have source files here
   }
 
   # https://lark-it.atlassian.net/browse/FCB-149
