@@ -51,7 +51,7 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-145
   $powershell_source_dir      = 'c:/larktemp/VMWare Tools'
   $powershell_destination_dir = "${toolbox_destination_dir}/powershellscripts"
-  dsc_file {'poswershellscripts Directory':
+  dsc_file {'powershellscripts Directory':
     dsc_ensure          => 'present',
     dsc_type            => 'Directory',
     dsc_destinationpath => $powershell_destination_dir,
