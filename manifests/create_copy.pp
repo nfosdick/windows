@@ -12,7 +12,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-142
   exec { 'Copy PCW':
-    command   => "Copy-Item -Path \"${pcw_source_dir}\" -Destination \"${pcw_destination_dir}\" -Recurse -Force",
+    command   => "Copy-Item -Path \"${pcw_source_dir}\" -Destination \"${pcw_destination_dir}/\" -Recurse -Force",
     provider  => powershell,
     logoutput => $logoutput,
     require   => Dsc_file[ 'PCW Directory' ],
