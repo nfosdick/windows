@@ -24,7 +24,7 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-164
   # https://puppet.com/docs/puppet/4.10/resources_exec_windows.html
   exec { 'Run SEO Config Script':
-    command   => "${pcw_destination_dir}\\pcw-set.cmd;Exit 0",
+    command   => "cmd.exe /c ${pcw_destination_dir}\\pcw-set.cmd;Exit 0",
     provider  => powershell,
     #logoutput => $logoutput,
     logoutput => true,
