@@ -149,11 +149,13 @@ class windows::create_copy(
   }
 
   # https://lark-it.atlassian.net/browse/FCB-140
+  #  start-process bcdedit.exe "/set {current} nx AlwaysOn"
+  #  verfiy with: bcdedit /v
   exec { 'Set DEP with BCEDIT':
     command   => "start-process bcdedit.exe \"/set {current} nx OptIn\"",
     provider  => powershell,
     logoutput => $logoutput,
     #unless    => "bcdedit /v|Select-String nx|Select-String OptIn",
-    unless    => "if(bcdedit /v|Select-String nx|Select-String OptIn){ exit 0 }else{ exit 1 }",
+    unless    => "if(bcdedit /v|Select-String OptIn){ exit 0 }else{ exit 1 }",
   }
 }
