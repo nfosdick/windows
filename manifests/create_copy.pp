@@ -138,10 +138,12 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-139
   # example delete for testing: vssadmin delete ShadowStorage /For=C: /On=C:
+  # example list for testing: vssadmin list ShadowStorage
+  $vss_shadow_size='1G'
   exec { "Resize VSS Admin Shadow Storage to 1GB":
-    command   => "vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=1G",
+    command   => "vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=${vss_shadow_size}",
     provider  => powershell,
     logoutput => $logoutput,
-    #unless    => "if(Test-Path ${infosec_destination_dir}/${infosec_file}}){ exit 0 }else{ exit 1 }",
+    unless    => "vssadmin list ShadowStorage |Select-String \"Maximum Shadow Copy Storage space: ${vss_shadow_size}.00 GB\"",
   }
 }
