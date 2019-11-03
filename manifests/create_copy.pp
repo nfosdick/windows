@@ -135,4 +135,13 @@ class windows::create_copy(
 #    # Typically there is some flag here to tell if this has been run successfully
 #    # I don't have source files here
 #  }
+
+  # https://lark-it.atlassian.net/browse/FCB-139
+  # example delete for testing: vssadmin delete ShadowStorage /For=C: /On=C:
+  exec { "Resize VSS Admin Shadow Storage to 1GB":
+    command   => "vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=1G",
+    provider  => powershell,
+    logoutput => $logoutput,
+    #unless    => "if(Test-Path ${infosec_destination_dir}/${infosec_file}}){ exit 0 }else{ exit 1 }",
+  }
 }
