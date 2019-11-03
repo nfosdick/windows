@@ -1,5 +1,6 @@
 class windows::create_copy(
-  $logoutput = 'on_failure',
+  $logoutput       = 'on_failure',
+  $vss_shadow_size = '1'
 ){
   # https://lark-it.atlassian.net/browse/FCB-141
   $pcw_source_dir      = 'c:/larktemp/scripts'
@@ -139,9 +140,9 @@ class windows::create_copy(
   # https://lark-it.atlassian.net/browse/FCB-139
   # example delete for testing: vssadmin delete ShadowStorage /For=C: /On=C:
   # example list for testing: vssadmin list ShadowStorage
-  $vss_shadow_size='1G'
+  $vss_shadow_size='1'
   exec { "Resize VSS Admin Shadow Storage to 1GB":
-    command   => "vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=${vss_shadow_size}",
+    command   => "vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=${vss_shadow_size}G",
     provider  => powershell,
     logoutput => $logoutput,
     unless    => "vssadmin list ShadowStorage |Select-String \"Maximum Shadow Copy Storage space: ${vss_shadow_size}.00 GB\"",
