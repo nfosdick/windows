@@ -153,6 +153,7 @@ class windows::create_copy(
     command   => "start-process bcdedit.exe \"/set {current} nx OptIn\"",
     provider  => powershell,
     logoutput => $logoutput,
-    unless    => "bcdedit /v|Select-String nx|Select-String OptIn",
+    #unless    => "bcdedit /v|Select-String nx|Select-String OptIn",
+    unless    => "if(bcdedit /v|Select-String nx|Select-String OptIn){ exit 0 }else{ exit 1 }",
   }
 }
