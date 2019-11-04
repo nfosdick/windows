@@ -47,14 +47,7 @@ puppet apply .\test.pp
 
 
 
-
-
-
-
-
-
-
-
+#vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=1G
 #mkdir c:\Install\scripts
 #echo "Hello" > c:\Install\scripts\InfoSec64.cmd
 #msiexec /qn /norestart /i $file
