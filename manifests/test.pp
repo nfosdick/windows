@@ -1,1 +1,2 @@
-include windows
+#include windows
+include windows::cis_security
