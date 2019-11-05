@@ -61,8 +61,8 @@ class windows::cis_security {
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters',
     dsc_valuename => 'DisabledComponents',
-    dsc_valuedata => 'ffffffff',
-    dsc_valuetype => 'Dword',
+    dsc_valuedata => '0xffffffff',
+    dsc_valuetype => 'Binary',
     dsc_force     => true,
   }
 }
