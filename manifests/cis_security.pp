@@ -29,11 +29,29 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  dsc_registry {'Security System':
+  dsc_registry {'System MaxSize':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\System',
     dsc_valuename => 'MaxSize',
     dsc_valuedata => '84000',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
+
+  dsc_registry {'System Retention':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\System',
+    dsc_valuename => 'Retention',
+    dsc_valuedata => '0',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
+
+  dsc_registry {'System AutoBackupLogFiles':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\eventlog\System',
+    dsc_valuename => 'AutoBackupLogFiles',
+    dsc_valuedata => '0',
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
