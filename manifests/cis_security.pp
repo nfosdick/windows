@@ -64,7 +64,7 @@ class windows::cis_security {
     dsc_hex       => true,
     dsc_valuename => 'DisabledComponents',
     dsc_valuedata => 'ffffffff',
-    dsc_valuetype => 'Hex',
+    dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
 }
