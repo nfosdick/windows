@@ -56,7 +56,7 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  dsc_registry {'System AutoBackupLogFiles':
+  dsc_registry {'Tcpip6 DisabledComponents':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters',
     dsc_valuename => 'DisabledComponents',
