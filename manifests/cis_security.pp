@@ -67,4 +67,13 @@ class windows::cis_security {
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
+
+  dsc_registry {'W32Time Start':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\W32Time',
+    dsc_valuename => 'start',
+    dsc_valuedata => '2',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
 }
