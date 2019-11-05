@@ -56,12 +56,12 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  dsc_registry {'Tcpip6 DisabledComponents':
-    dsc_ensure    => 'Present',
-    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters',
-    dsc_valuename => 'DisabledComponents',
-    dsc_valuedata => 'ffffff',
-    dsc_valuetype => 'Dword',
-    dsc_force     => true,
-  }
+#  dsc_registry {'Tcpip6 DisabledComponents':
+#    dsc_ensure    => 'Present',
+#    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters',
+#    dsc_valuename => 'DisabledComponents',
+#    dsc_valuedata => 'ffffff',
+#    dsc_valuetype => 'Dword',
+#    dsc_force     => true,
+#  }
 }
