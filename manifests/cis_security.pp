@@ -68,6 +68,7 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
+  # reg add HKLM\SYSTEM\CurrentControlSet\services\W32Time /v start /t REG_DWORD /d 2 /f
   dsc_registry {'W32Time Start':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\W32Time',
