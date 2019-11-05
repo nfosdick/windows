@@ -62,7 +62,7 @@ class windows::cis_security {
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters',
     dsc_valuename => 'DisabledComponents',
     dsc_valuedata => 'ffffffff',
-    dsc_valuetype => 'Dword',
+    dsc_valuetype => 'Hex',
     dsc_force     => true,
   }
 }
