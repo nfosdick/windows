@@ -128,4 +128,15 @@ class windows::cis_security {
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
+
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DayLightBias /t REG_DWORD /d 0x12c /f
+  dsc_registry {'TimeZoneInformation DayLightBias':
+    dsc_ensure    => 'Present',
+    dsc_hex       => true,
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
+    dsc_valuename => 'DayLightBias',
+    dsc_valuedata => '0xffffffc4',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
 }
