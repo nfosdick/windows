@@ -90,7 +90,7 @@ class windows::cis_security {
   }
 
   # reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers /v 6 /t REG_SZ /d ntp.1.aaa.com /f
-  dsc_registry {'W32Time NtpServer':
+  dsc_registry {'W32Time 6':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers',
     dsc_valuename => '6',
