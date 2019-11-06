@@ -99,4 +99,9 @@ class windows::cis_security {
   }
 
 
-}
+  dsc_registry {'W32Time Default':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers',
+    dsc_valuedata => '6',
+    dsc_force     => true,
+  }}
