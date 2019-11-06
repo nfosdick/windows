@@ -110,9 +110,10 @@ class windows::cis_security {
   # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v ActiveTimeBias /t REG_DWORD /d 0xf0 /f
   dsc_registry {'TimeZoneInformation ActiveTimeBias':
     dsc_ensure    => 'Present',
+    dsc_hex       => true,
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
     dsc_valuename => 'ActiveTimeBias',
-    dsc_valuedata => 'f0',
+    dsc_valuedata => '0xf0',
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
