@@ -129,7 +129,7 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DayLightBias /t REG_DWORD /d 0x12c /f
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DayLightBias /t REG_DWORD /d 0xffffffc4 /f
   dsc_registry {'TimeZoneInformation DayLightBias':
     dsc_ensure    => 'Present',
     dsc_hex       => true,
