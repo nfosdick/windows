@@ -79,11 +79,24 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
+  #  reg add HKLM\SYSTEM\CurrentControlSet\services\W32Time\Parameter /v NtpServer /t REG_SZ /d ntp.1.aaa.com,0x9 /f
+  $ntp_server = 'ntp.1.aaa.com'
   dsc_registry {'W32Time NtpServer':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\W32Time\Parameters',
     dsc_valuename => 'NtpServer',
-    dsc_valuedata => 'ntp.1.aaa.com,0x9',
+    dsc_valuedata => "${ntp_server},0x9",
     dsc_force     => true,
   }
+
+  # reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers /v 6 /t REG_SZ /d ntp.1.aaa.com /f
+  dsc_registry {'W32Time NtpServer':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers',
+    dsc_valuename => '6,
+    dsc_valuedata => "${ntp_server}",
+    dsc_force     => true,
+  }
+
+
 }
