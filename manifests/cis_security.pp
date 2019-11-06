@@ -139,4 +139,13 @@ class windows::cis_security {
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
+
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DayLightName /t REG_SZ /d 0xffffffc4 /f
+  dsc_registry {'TimeZoneInformation DayLightName':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
+    dsc_valuename => 'DayLightName',
+    dsc_valuedata => 'Eastern Daylight Time',
+    dsc_force     => true,
+  }
 }
