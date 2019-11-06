@@ -58,6 +58,7 @@ class windows::cis_security {
 
   # reg add HKLM\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters /v DisabledComponents /t REG_DWORD /d 0xffffffff
   # Bug: https://github.com/PowerShell/xPSDesiredStateConfiguration/issues/332
+  # https://github.com/puppetlabs/puppetlabs-dsc/blob/master/lib/puppet/type/dsc_registry.rb
   dsc_registry {'Tcpip6 DisabledComponents':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip6\Parameters',
@@ -75,6 +76,14 @@ class windows::cis_security {
     dsc_valuename => 'start',
     dsc_valuedata => '2',
     dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
+
+  dsc_registry {'W32Time NtpServer':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\W32Time\Parameters',
+    dsc_valuename => 'NtpServer'
+    dsc_valuedata => 'ntp.1.aaa.com,0x9',
     dsc_force     => true,
   }
 }

@@ -150,6 +150,7 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-140
   # https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/boot-parameters-to-configure-dep-and-pae
+  # https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/bcdedit-command-line-options
   #  start-process bcdedit.exe "/set {current} nx AlwaysOn"
   #  verfiy with: bcdedit /v
   exec { 'Set DEP with BCEDIT':
