@@ -82,7 +82,7 @@ class windows::cis_security {
   dsc_registry {'W32Time NtpServer':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\W32Time\Parameters',
-    dsc_valuename => 'NtpServer'
+    dsc_valuename => 'NtpServer',
     dsc_valuedata => 'ntp.1.aaa.com,0x9',
     dsc_force     => true,
   }
