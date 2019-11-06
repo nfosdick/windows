@@ -129,22 +129,22 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DayLightBias /t REG_DWORD /d 0xffffffc4 /f
-  dsc_registry {'TimeZoneInformation DayLightBias':
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DaylightBias /t REG_DWORD /d 0xffffffc4 /f
+  dsc_registry {'TimeZoneInformation DaylightBias':
     dsc_ensure    => 'Present',
     dsc_hex       => true,
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
-    dsc_valuename => 'DayLightBias',
+    dsc_valuename => 'DaylightBias',
     dsc_valuedata => '0xffffffc4',
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
 
-  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DayLightName /t REG_SZ /d "Eastern Daylight Time" /f
-  dsc_registry {'TimeZoneInformation DayLightName':
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v DaylightName /t REG_SZ /d "Eastern Daylight Time" /f
+  dsc_registry {'TimeZoneInformation DaylightName':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
-    dsc_valuename => 'DayLightName',
+    dsc_valuename => 'DaylightName',
     dsc_valuedata => 'Eastern Daylight Time',
     dsc_force     => true,
   }
