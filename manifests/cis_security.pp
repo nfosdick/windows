@@ -118,7 +118,7 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v Bias /t REG_DWORD /d 0xf0 /f
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v Bias /t REG_DWORD /d 0x12c /f
   dsc_registry {'TimeZoneInformation Bias':
     dsc_ensure    => 'Present',
     dsc_hex       => true,
