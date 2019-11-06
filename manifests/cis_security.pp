@@ -98,10 +98,12 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-
+  # reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers /t REG_SZ /d 6 /f
   dsc_registry {'W32Time Default':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers',
+    dsc_valuename => '(Default)',
     dsc_valuedata => '6',
     dsc_force     => true,
-  }}
+  }
+}
