@@ -170,6 +170,6 @@ class windows::cis_security {
   dsc_service{'enable_w32time':
     dsc_ensure => 'present',
     dsc_name   => 'w32time',
-    state      => 'running',
+    dsc_state  => 'Running',
   }
 }
