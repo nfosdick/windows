@@ -183,7 +183,7 @@ class windows::cis_security {
     refreshonly => true,
     path        => ['c:/windows/system32'],
     provider    => powershell,
-    suscribe    => Dsc_service[ 'enable_w32time' ],  
+    subscribe    => Dsc_service[ 'enable_w32time' ],  
   }
 
 
