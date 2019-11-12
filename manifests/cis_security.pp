@@ -166,4 +166,9 @@ class windows::cis_security {
     dsc_valuedata => 'Eastern Daylight Time',
     dsc_force     => true,
   }
+
+  dsc_service{'enable_w32time':
+    dsc_ensure => 'running',
+    dsc_name   => 'w32time',
+  }
 }
