@@ -187,7 +187,7 @@ class windows::cis_security {
   }
 
   # reg add HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc /v start /t REG_DWORD /d 4 /f
-  dsc_registry {'W32Time Start':
+  dsc_registry {'MpsSvc Start':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\\SYSTEM\CurrentControlSet\Services\MpsSvc',
     dsc_valuename => 'start',
