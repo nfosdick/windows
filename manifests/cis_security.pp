@@ -195,5 +195,4 @@ class windows::cis_security {
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
-
 }
