@@ -186,5 +186,14 @@ class windows::cis_security {
     subscribe    => Dsc_service[ 'enable_w32time' ],  
   }
 
+  # reg add HKLM\SYSTEM\CurrentControlSet\Services\MpsSvc /v start /t REG_DWORD /d 4 /f
+  dsc_registry {'W32Time Start':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\\SYSTEM\CurrentControlSet\Services\MpsSvc',
+    dsc_valuename => 'start',
+    dsc_valuedata => '4',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
 
 }
