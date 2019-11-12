@@ -148,24 +148,26 @@ class windows::cis_security {
     dsc_valuedata => 'Eastern Daylight Time',
     dsc_force     => true,
     notify        => Exec[ 'w32tm resync' ],
+    before        => Dsc_service[ 'enable_w32time' ],
   }
 
-  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v StandardName /t REG_SZ /d "Eastern Daylight Time" /f
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v StandardName /t REG_SZ /d "Eastern Standard Time" /f
   dsc_registry {'TimeZoneInformation StandardName':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
     dsc_valuename => 'StandardName',
-    dsc_valuedata => 'Eastern Daylight Time',
+    dsc_valuedata => 'Eastern Standard Time',
     dsc_force     => true,
     notify        => Exec[ 'w32tm resync' ],
+    before        => Dsc_service[ 'enable_w32time' ],
   }
 
-  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v TimeZoneKeyName /t REG_SZ /d "Eastern Daylight Time" /f
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v TimeZoneKeyName /t REG_SZ /d "Eastern Standard Time" /f
   dsc_registry {'TimeZoneInformation TimeZoneKeyName':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
     dsc_valuename => 'TimeZoneKeyName',
-    dsc_valuedata => 'Eastern Daylight Time',
+    dsc_valuedata => 'Eastern Standard Time',
     dsc_force     => true,
   }
 
@@ -181,5 +183,8 @@ class windows::cis_security {
     refreshonly => true,
     path        => ['c:/windows/system32'],
     provider    => powershell,
+    suscribe    => Dsc_service[ 'enable_w32time' ],  
   }
+
+
 }
