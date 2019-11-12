@@ -148,4 +148,13 @@ class windows::cis_security {
     dsc_valuedata => 'Eastern Daylight Time',
     dsc_force     => true,
   }
+
+  # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v StandardName /t REG_SZ /d "Eastern Daylight Time" /f
+  dsc_registry {'TimeZoneInformation StandardName':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation',
+    dsc_valuename => 'StandardName',
+    dsc_valuedata => 'Eastern Daylight Time',
+    dsc_force     => true,
+  }
 }
