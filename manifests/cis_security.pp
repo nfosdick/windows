@@ -147,6 +147,7 @@ class windows::cis_security {
     dsc_valuename => 'DaylightName',
     dsc_valuedata => 'Eastern Daylight Time',
     dsc_force     => true,
+    notify        => Exec[ 'w32tm resync' ],
   }
 
   # reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v StandardName /t REG_SZ /d "Eastern Daylight Time" /f
