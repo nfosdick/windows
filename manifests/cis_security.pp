@@ -222,7 +222,6 @@ class windows::cis_security {
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess',
     dsc_valuename => '',
     dsc_valuedata => '',
-    dsc_valuetype => '',
     dsc_force     => true,
   }
 }
