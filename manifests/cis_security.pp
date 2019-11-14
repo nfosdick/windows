@@ -217,7 +217,7 @@ class windows::cis_security {
   }
 
   # reg add HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess /f
-  dsc_registry {'SharedAccess Start':
+  dsc_registry {'SharedAccess':
     dsc_ensure    => 'Present',
     dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess',
     dsc_valuename => '',
