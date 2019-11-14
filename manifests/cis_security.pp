@@ -206,5 +206,13 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-
+  # reg add HKLM\SYSTEM\CurrentControlSet\Services\HidServ /v start /t REG_DWORD /d 4 /f
+  dsc_registry {'HidServ Start':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HidServ',
+    dsc_valuename => 'start',
+    dsc_valuedata => '4',
+    dsc_valuetype => 'Dword',
+    dsc_force     => true,
+  }
 }
