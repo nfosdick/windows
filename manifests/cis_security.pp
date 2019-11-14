@@ -234,4 +234,13 @@ class windows::cis_security {
     dsc_valuetype => 'Dword',
     dsc_force     => true,
   }
+
+  # reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticecaption /t REG_SZ /d "First Citizens Bank Logon Notice" /f
+  dsc_registry {'System Legalnoticecaption':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System',
+    dsc_valuename => 'legalnoticecaption',
+    dsc_valuedata => 'First Citizens Bank Logon Notice',
+    dsc_force     => true,
+  }
 }
