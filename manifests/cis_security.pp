@@ -243,4 +243,13 @@ class windows::cis_security {
     dsc_valuedata => 'First Citizens Bank Logon Notice',
     dsc_force     => true,
   }
+
+  # reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v legalnoticetext /t REG_SZ /d "The information on this network is the property of First Citizens Bank" /f
+  dsc_registry {'System Legalnoticetext':
+    dsc_ensure    => 'Present',
+    dsc_key       => 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System',
+    dsc_valuename => 'legalnoticetext',
+    dsc_valuedata => 'The information on this network is the property of First Citizens Bank',
+    dsc_force     => true,
+  }
 }
