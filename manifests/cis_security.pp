@@ -258,21 +258,6 @@ class windows::cis_security {
   # Get-ChildItem $i | ForEach-Object {  
   #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
   # }
-  case $netbt_setting {
-    'enabled':  {
-      $netbiosoptions = 1
-    }
-    'disabled':  {
-      $netbiosoptions = 2
-    }
-    'dhcp': {
-      $netbiosoptions = 0
-    }
-    default: {
-      notify {'Invalid option for netbt_setting: Defaulting to DHCP selection':}
-      $netbiosoptions = 0
-    }
-  }
   $::interface_guids.each | $key, $value| {
     #registry_value { "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_{${value}}\\NetbiosOptions":
     #  ensure => present,
