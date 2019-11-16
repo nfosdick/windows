@@ -257,8 +257,8 @@ class windows::cis_security {
   # https://puppet.com/blog/starting-out-writing-custom-facts-windows
   # Because we use variables in the dsc_key name we have to use double quote and thus have to use the \\
   # Testing:
-  #$nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
-  #foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
+  #   $nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
+  #   foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
   $::interface_guids.each | $key, $value| {
     dsc_registry {"Disable Netbios Tcpip: ${value} ${key}":
      dsc_ensure    => 'Present',
