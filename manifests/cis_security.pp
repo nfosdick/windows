@@ -271,9 +271,10 @@ class windows::cis_security {
   }
 
   # NET LOCALGROUP guests guest /add
+  # Add-LocalGroupMember -Group "Guests" -Member "Guest"
   exec { 'Remove Guest From Guests Localgroup':
     command  => 'Remove-LocalGroupMember -Group "Guests" -Member "Guest"',
-    unless   => 'if(Get-LocalGroupMember -Group Guests -Member Guest){ exit 0 }else{ exit 1 }',
+    onlyif   => 'if(Get-LocalGroupMember -Group Guests -Member Guest){ exit 0 }else{ exit 1 }',
     provider => powershell,
   }
 
