@@ -258,8 +258,8 @@ class windows::cis_security {
   $::interface_guids.each | $key, $value| {
      notify{"Nick $value":}
     $reg_entry="Disable Netbios Tcpip: ${value}"
-#    dsc_registry {"Disable Netbios Tcpip: ${value}":
-    dsc_registry {$reg_entry:
+    dsc_registry {"Disable Netbios Tcpip: $value":
+#    dsc_registry {$reg_entry:
      dsc_ensure    => 'Present',
      dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_\{${value}\}",
      dsc_valuename => 'NetbiosOptions',
