@@ -256,8 +256,8 @@ class windows::cis_security {
   # notify{"Nick $interface_guids":}
   # https://puppet.com/blog/starting-out-writing-custom-facts-windows
   # Testing:
-  $nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
-  foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
+  #$nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
+  #foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
   $::interface_guids.each | $key, $value| {
     dsc_registry {"Disable Netbios Tcpip: ${value} ${key}":
      dsc_ensure    => 'Present',
