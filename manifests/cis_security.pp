@@ -255,6 +255,7 @@ class windows::cis_security {
 
   # notify{"Nick $interface_guids":}
   # https://puppet.com/blog/starting-out-writing-custom-facts-windows
+  # Because we use variables in the dsc_key name we have to use double quote and thus have to use the \\
   # Testing:
   #$nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
   #foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
@@ -268,14 +269,6 @@ class windows::cis_security {
      dsc_force     => true,
     }
   }
-  #$nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
-  #foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
-  #exec { 'Disable Netbios Tcpip':
-  #  command   => file("${module_name}/disable_netbios_tcpip.ps1"),
-  #  onlyif    => file("${module_name}/check_netbios_tcpip.ps1"),
-  #  provider  => powershell,
-  #  logoutput => true,
-  #}
   # NET LOCALGROUP guest guest /delete
 
 }
