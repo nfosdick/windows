@@ -262,7 +262,7 @@ class windows::cis_security {
 #    dsc_registry {$reg_entry:
      dsc_ensure    => 'Present',
      #dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_${value}",
-     dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_{f622e5c7-1e63-4da9-a16b-7db6f20959a8}",
+     dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_/{f622e5c7-1e63-4da9-a16b-7db6f20959a8/}",
      dsc_valuename => 'NetbiosOptions',
      dsc_valuedata => '2',
      dsc_valuetype => 'Dword',
