@@ -255,12 +255,11 @@ class windows::cis_security {
 
   # cscript c:\install\scirpts\DisableNetBios.vbs 
   # https://stackoverflow.com/questions/34387413/command-line-disable-netbios
-   Get-ChildItem -Path HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces -Depth 1
-#Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces  | select pschildname
+  # (Get-ChildItem -Path HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces).pschildname
   # $interface  = 'HKLM:\SYSTEM\CurrentControlSet\Services\netbt\Parameters\interfaces'  
   # Get-ChildItem $i | ForEach-Object {  
-  #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
-  #  echo $i
+  #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2 
+  #  echo $_
   # }
   #$::interface_guids.each | $key, $value| {
     #notify{"Nick HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_${value}":}
@@ -275,6 +274,12 @@ class windows::cis_security {
     #}
   #}
 
+  exec { 'rename-guest':
+    command   => file('disable_netbios_tcpip.ps1'),
+ #   onlyif    => file('guest/guest-exists.ps1'),
+    provider  => powershell,
+    logoutput => true,
+  }
   # NET LOCALGROUP guest guest /delete
 
 }
