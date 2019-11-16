@@ -253,8 +253,7 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-
-  notify{"Nick $interface_guids":}
+  # notify{"Nick $interface_guids":}
   $::interface_guids.each | $key, $value| {
     dsc_registry {"Disable Netbios: Tcpip_{${value}}":
       dsc_ensure    => 'Present',
