@@ -252,4 +252,16 @@ class windows::cis_security {
     dsc_valuedata => 'The information on this network is the property of First Citizens Bank',
     dsc_force     => true,
   }
+
+  # cscript c:\install\scirpts\DisableNetBios.vbs 
+  # $i = 'HKLM:\SYSTEM\CurrentControlSet\Services\netbt\Parameters\interfaces'  
+  # Get-ChildItem $i | ForEach-Object {  
+  #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
+  # }
+  class { netbt:
+    netbt_setting => 'enable'
+  }
+
+  # NET LOCALGROUP guest guest /delete
+
 }
