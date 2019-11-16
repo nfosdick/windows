@@ -267,7 +267,7 @@ class windows::cis_security {
     dsc_registry {"Disable Netbios: Tcpip_{${value}}":
       dsc_ensure    => 'Present',
   #    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_${value}",
- #    dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_\{a5582e6e-d594-40c0-8135-06a7a4e6dbfe\}",
+      dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_\{a5582e6e-d594-40c0-8135-06a7a4e6dbfe\}",
       dsc_valuename => 'NetbiosOption',
       dsc_valuedata => '2',
       dsc_valuetype => 'Dword',
