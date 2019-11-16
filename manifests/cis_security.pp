@@ -256,7 +256,7 @@ class windows::cis_security {
   # notify{"Nick $interface_guids":}
   # https://puppet.com/blog/starting-out-writing-custom-facts-windows
   $::interface_guids.each | $key, $value| {
-    dsc_registry {"Disable Netbios: Tcpip_\{${value}\}":
+    dsc_registry {"Disable Netbios Tcpip: ${value}":
       dsc_ensure    => 'Present',
       dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_\{${value}\}",
       dsc_valuename => 'NetbiosOptions',
