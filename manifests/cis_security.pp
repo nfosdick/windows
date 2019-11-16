@@ -255,14 +255,24 @@ class windows::cis_security {
 
 
   notify{"Nick $interface_guids":}
+  $::interface_guids.each | $key, $value| {
+    dsc_registry {"Disable Netbios: Tcpip_{${value}}":
+      dsc_ensure    => 'Present',
+      dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_{${value}}",
+      dsc_valuename => 'NetbiosOptions',
+      dsc_valuedata => '2',
+      dsc_valuetype => 'Dword',
+      dsc_force     => true,
+    }
+  }
   #$nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
   #foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
-  exec { 'Disable Netbios Tcpip':
-    command   => file("${module_name}/disable_netbios_tcpip.ps1"),
-    onlyif    => file("${module_name}/check_netbios_tcpip.ps1"),
-    provider  => powershell,
-    logoutput => true,
-  }
+  #exec { 'Disable Netbios Tcpip':
+  #  command   => file("${module_name}/disable_netbios_tcpip.ps1"),
+  #  onlyif    => file("${module_name}/check_netbios_tcpip.ps1"),
+  #  provider  => powershell,
+  #  logoutput => true,
+  #}
   # NET LOCALGROUP guest guest /delete
 
 }
