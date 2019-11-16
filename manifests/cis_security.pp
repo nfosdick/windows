@@ -254,10 +254,13 @@ class windows::cis_security {
   }
 
   # cscript c:\install\scirpts\DisableNetBios.vbs 
-  # $i = 'HKLM:\SYSTEM\CurrentControlSet\Services\netbt\Parameters\interfaces'  
-  # Get-ChildItem $i | ForEach-Object {  
-  #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
-  # }
+  # https://stackoverflow.com/questions/34387413/command-line-disable-netbios
+   Get-ChildItem -Path HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces -Depth 1
+   $interface  = 'HKLM:\SYSTEM\CurrentControlSet\Services\netbt\Parameters\interfaces'  
+   Get-ChildItem $i | ForEach-Object {  
+    Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
+    echo $i
+   }
   #$::interface_guids.each | $key, $value| {
     #notify{"Nick HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_${value}":}
     notify{"Nick $interface_guids":}
