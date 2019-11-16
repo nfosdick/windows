@@ -259,7 +259,7 @@ class windows::cis_security {
   #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
   # }
   $::interface_guids.each | $key, $value| {
-    notify{"Nick Disable Netbios: Tcpip_{${value}}":
+    notify{"Nick Disable Netbios: Tcpip_{${value}}":}
     #registry_value { "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_{${value}}\\NetbiosOptions":
     #  ensure => present,
     #  type   => dword,
