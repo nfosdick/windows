@@ -258,8 +258,35 @@ class windows::cis_security {
   # Get-ChildItem $i | ForEach-Object {  
   #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
   # }
-  class { netbt:
-    netbt_setting => 'enable'
+  case $netbt_setting {
+    'enabled':  {
+      $netbiosoptions = 1
+    }
+    'disabled':  {
+      $netbiosoptions = 2
+    }
+    'dhcp': {
+      $netbiosoptions = 0
+    }
+    default: {
+      notify {'Invalid option for netbt_setting: Defaulting to DHCP selection':}
+      $netbiosoptions = 0
+    }
+  }
+  $::interface_guids.each | $key, $value| {
+    #registry_value { "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_{${value}}\\NetbiosOptions":
+    #  ensure => present,
+    #  type   => dword,
+    #  data   => $netbiosoptions,
+    #}
+    dsc_registry {"Disable Netbios: Tcpip_{${value}}":
+      dsc_ensure    => 'Present',
+      dsc_key       => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_{${value}}\NetbiosOption",
+      dsc_valuename => 'start',
+      dsc_valuedata => '2',
+      dsc_valuetype => 'Dword',
+      dsc_force     => true,
+    }
   }
 
   # NET LOCALGROUP guest guest /delete
