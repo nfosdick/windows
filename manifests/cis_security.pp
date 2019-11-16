@@ -258,8 +258,9 @@ class windows::cis_security {
   # Get-ChildItem $i | ForEach-Object {  
   #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2
   # }
-  $::interface_guids.each | $key, $value| {
-    notify{"Nick Disable Netbios: Tcpip_{${value}}":}
+  notify{"Nick $::interface_guids":}
+  #$::interface_guids.each | $key, $value| {
+  #  notify{"Nick Disable Netbios: Tcpip_{${value}}":}
     #registry_value { "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NetBT\\Parameters\\Interfaces\\Tcpip_{${value}}\\NetbiosOptions":
     #  ensure => present,
     #  type   => dword,
@@ -273,7 +274,7 @@ class windows::cis_security {
     #  dsc_valuetype => 'Dword',
     #  dsc_force     => true,
     #}
-  }
+  #}
 
   # NET LOCALGROUP guest guest /delete
 
