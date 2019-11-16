@@ -253,6 +253,8 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
+
+  notify{"Nick $interface_guids":}
   #$nic_list = (Get-WmiObject win32_networkadapterconfiguration | where{$_.IPEnabled -eq 1})
   #foreach ($nic in $nic_list){$nic.SetTcpipNetbios(1)}
   exec { 'Disable Netbios Tcpip':
