@@ -269,6 +269,12 @@ class windows::cis_security {
      dsc_force     => true,
     }
   }
-  # NET LOCALGROUP guest guest /delete
+
+  # NET LOCALGROUP guests guest /add
+  exec { 'Remove Guest From Guests Localgroup':
+    command  => 'Remove-LocalGroupMember -Group "Guests" -Member "Guest"',
+    unless   => 'if(Get-LocalGroupMember -Group Guests -Member Guest){ exit 0 }else{ exit 1 }',
+    provider => powershell,
+  }
 
 }
