@@ -23,10 +23,10 @@ sleep 30
 refreshenv
 
 cd "C:\ProgramData\PuppetLabs\code\modules"
-git clone https://github.com/puppetlabs/puppetlabs-dsc.git
+#git clone https://github.com/puppetlabs/puppetlabs-dsc.git
+puppet module install puppetlabs-dsc --version 1.9.3
 git clone https://github.com/puppetlabs/puppetlabs-reboot.git
 git clone https://github.com/nfosdick/windows.git
-git clone https://github.com/velocity303/puppet_netbt.git
 puppet module install puppetlabs-powershell --version 2.3.0
 git clone https://github.com/puppetlabs/ruby-pwsh.git
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
