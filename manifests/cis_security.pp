@@ -276,7 +276,7 @@ class windows::cis_security {
 
   exec { 'rename-guest':
     command   => file("${module_name}/disable_netbios_tcpip.ps1"),
-    onlyif    => file("${module_name}/check_netbios_tcpip.ps1"),
+    unless    => file("${module_name}/check_netbios_tcpip.ps1"),
     provider  => powershell,
     logoutput => true,
   }
