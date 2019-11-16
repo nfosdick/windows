@@ -253,28 +253,7 @@ class windows::cis_security {
     dsc_force     => true,
   }
 
-  # cscript c:\install\scirpts\DisableNetBios.vbs 
-  # https://stackoverflow.com/questions/34387413/command-line-disable-netbios
-  # (Get-ChildItem -Path HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces).pschildname
-  # $interface  = 'HKLM:\SYSTEM\CurrentControlSet\Services\netbt\Parameters\interfaces'  
-  # Get-ChildItem $i | ForEach-Object {  
-  #  Set-ItemProperty -Path "$i\$($_.pschildname)" -name NetBiosOptions -value 2 
-  #  echo $_
-  # }
-  #$::interface_guids.each | $key, $value| {
-    #notify{"Nick HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_${value}":}
-    #notify{"Nick $interface_guids":}
-    #dsc_registry {"Disable Netbios: Tcpip_${value}":
-    #  dsc_ensure    => 'Present',
-    #  dsc_key       => "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\Tcpip_{${value}}",
-    #  dsc_valuename => 'NetbiosOption',
-    #  dsc_valuedata => '2',
-    #  dsc_valuetype => 'Dword',
-    #  dsc_force     => true,
-    #}
-  #}
-
-  exec { 'rename-guest':
+  exec { 'Disable Netbios Tcpip':
     command   => file("${module_name}/disable_netbios_tcpip.ps1"),
     unless    => file("${module_name}/check_netbios_tcpip.ps1"),
     provider  => powershell,
