@@ -24,17 +24,16 @@ class windows::create_copy(
 
   # https://lark-it.atlassian.net/browse/FCB-164
   # https://puppet.com/docs/puppet/4.10/resources_exec_windows.html
-#  exec { 'Run SEO Config Script':
-#    #command   => "cmd.exe /c ${pcw_destination_dir}\\pcw-set.cmd;Exit 0",
-#    command   => "${pcw_destination_dir}/pcw-set.ps1",
-#    provider  => powershell,
-#    logoutput => $logoutput,
-#    #logoutput => true,
-#    require   => Exec[ 'Copy PCW' ],
-#    # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
-#    # Typically there is some flag here to tell if this has been run successfully
-#    # I don't have source files here
-#  }
+  exec { 'Run SEO Config Script':
+    command   => "${pcw_destination_dir}/pcw-set.ps1",
+    provider  => powershell,
+    logoutput => $logoutput,
+    #logoutput => true,
+    require   => Exec[ 'Copy PCW' ],
+    # onlyif or unless "if(command to run if to check if command has already been run){ exit 0 }else{ exit 1 }",
+    # Typically there is some flag here to tell if this has been run successfully
+    # I don't have source files here
+  }
 
   # https://lark-it.atlassian.net/browse/FCB-150
   dsc_file {'Temp Directory':

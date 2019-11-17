@@ -25,4 +25,13 @@ class windows {
     path     => ['c:/windows/system32'],
     provider => powershell,
   }
+
+  # https://lark-it.atlassian.net/browse/FCB-163
+  $source_dir = 'c:/larktemp'
+  exec { 'Name And Network':
+    command   => "${source_dir}/set-CNLAN.ps1",
+    path      => ['c:/windows/system32'],
+    provider  => powershell,
+    # An unless or an onlyif will be needed right here
+  }
 }
