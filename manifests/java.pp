@@ -1,7 +1,7 @@
 class windows::java(
-  $destination_path = 'c:\larktemp'
-  $install_version  = '8u231'
-  $architecture     = $facts['architecture']
+  $destination_path = 'c:\larktemp',
+  $install_version  = '8u231',
+  $architecture     = $facts['architecture'],
 ){
 
   dsc_xremotefile {'Download WebContent Zip':
