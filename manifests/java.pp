@@ -11,7 +11,8 @@ class windows::java(
   }
 
   package { "jdk-${install_version}-windows-${architecture}.exe":
-    ensure          => installed,
+#    ensure          => installed,
+    ensure          => '8.0.2310.11',
     source          => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
     install_options => ['/s'],
     provider        => windows,
