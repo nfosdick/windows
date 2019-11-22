@@ -5,9 +5,16 @@ class windows::java(
   $architecture     = $facts['architecture'],
 ){
 
-  dsc_xremotefile {'Download WebContent Zip':
+  dsc_xremotefile {"Download jdk-${install_version}-windows-${architecture}.exe":
     dsc_destinationpath => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
     dsc_uri             => "${url}/jdk-${install_version}-windows-${architecture}.exe",
+  }
+
+  package { "jdk-${install_version}-windows-${architecture}.exe":
+    ensure          => installed,
+    source          => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
+    install_options => ['/s'],
+    require         => Dsc_xremotefile[ "Download jdk-${install_version}-windows-${architecture}.exe" ],
   }
 
 }

@@ -23,13 +23,10 @@ sleep 30
 refreshenv
 
 cd "C:\ProgramData\PuppetLabs\code\modules"
-#git clone https://github.com/puppetlabs/puppetlabs-dsc.git
 puppet module install puppetlabs-dsc --version 1.9.3
 git clone https://github.com/puppetlabs/puppetlabs-reboot.git
 git clone https://github.com/nfosdick/windows.git
 puppet module install puppetlabs-powershell --version 2.3.0
-#git clone https://github.com/puppetlabs/ruby-pwsh.git
-git clone https://github.com/counsyl/puppet-windows.git
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
 
 
@@ -66,3 +63,5 @@ puppet apply .\test.pp
 #Start-Process msiexec.exe -Wait -ArgumentList '/I C:\larktemp\puppet-agent-5.5.16-x64.msi /quiet'
 # c:\Temp\VM-Tools\setup64.exe /S /v"/qn REBOOT=R"
 # Move-Item -Path "C:\${parentdir}\VMWare Tools" -Destination "C:\Temp\VM-Tools" -Force
+#git clone https://github.com/puppetlabs/puppetlabs-dsc.git
+#git clone https://github.com/puppetlabs/ruby-pwsh.git
