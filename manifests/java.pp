@@ -25,7 +25,7 @@ class windows::java(
     #command  => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe /s",
     command  => "Start-Process -FilePath ${destination_path}/jdk-${install_version}-windows-${architecture}.exe -ArgumentList '/s' -Wait",
     #unless   => 'if(Get-Command java | Select-Object Version|Select-String 8.0.2310.11){ exit 0 }else{ exit 1 }',
-    onlyif   => 'Get-Command java | Select-Object Version|Select-String 8.0.2310.11',
+    unless   => 'Get-Command java | Select-Object Version|Select-String 8.0.2310.11',
     provider => powershell,
   }
 }
