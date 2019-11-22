@@ -1,5 +1,5 @@
 class windows::java(
-  $url              = 'https://s3.amazonaws.com/weslson.com'
+  $url              = 'https://s3.amazonaws.com/weslson.com',
   $destination_path = 'c:/larktemp',
   $install_version  = '8u231',
   $architecture     = $facts['architecture'],
