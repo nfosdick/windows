@@ -1,5 +1,5 @@
 class windows::java(
-  $destination_path = 'c:\larktemp',
+  $destination_path = 'c:\\larktemp',
   $install_version  = '8u231',
   $architecture     = $facts['architecture'],
 ){
