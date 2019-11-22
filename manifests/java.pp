@@ -14,7 +14,9 @@ class windows::java(
     ensure          => installed,
     source          => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
     install_options => ['/s'],
+    provider        => windows,
     require         => Dsc_xremotefile[ "Download jdk-${install_version}-windows-${architecture}.exe" ],
   }
 
+# Get-Command java | Select-Object Version
 }
