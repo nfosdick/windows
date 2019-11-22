@@ -10,11 +10,11 @@ class windows::java(
     dsc_uri             => "${url}/jdk-${install_version}-windows-${architecture}.exe",
   }
 
-  package { "jdk-${install_version}-windows-${architecture}.exe":
-    ensure          => installed,
-    source          => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
-    install_options => ['/s'],
-    require         => Dsc_xremotefile[ "Download jdk-${install_version}-windows-${architecture}.exe" ],
-  }
+#  package { "jdk-${install_version}-windows-${architecture}.exe":
+#    ensure          => installed,
+#    source          => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
+#    install_options => ['/s'],
+#    require         => Dsc_xremotefile[ "Download jdk-${install_version}-windows-${architecture}.exe" ],
+#  }
 
 }
