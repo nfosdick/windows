@@ -20,10 +20,11 @@ class windows::java(
 #  }
 
   # https://stackoverflow.com/questions/18890926/how-to-get-the-java-version-in-powershell
+
   exec { "Install jdk-${install_version}-windows-${architecture}.exe":
     command  => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe /s",
-    #unless   => 'if(Get-Command java | Select-Object Version|Select-String 8.0.2310.11){ exit 0 }else{ exit 1 }',
-    onlyif   => 'Get-Command java | Select-Object Version|Select-String 8.0.2310.11',
+    onlyif   => 'if(Get-Command java | Select-Object Version|Select-String 8.0.2310.11){ exit 0 }else{ exit 1 }',
+    #onlyif   => 'Get-Command java | Select-Object Version|Select-String 8.0.2310.11',
     provider => powershell,
   }
 }
