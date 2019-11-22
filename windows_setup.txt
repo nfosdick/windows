@@ -29,8 +29,17 @@ git clone https://github.com/puppetlabs/puppetlabs-reboot.git
 git clone https://github.com/nfosdick/windows.git
 puppet module install puppetlabs-powershell --version 2.3.0
 #git clone https://github.com/puppetlabs/ruby-pwsh.git
-git clone https://github.com/cyberious/puppet-windows_java.git
+git clone https://github.com/counsyl/puppet-windows.git
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
+
+
+#windows 
+$file="jdk-8u231-windows-x64.exe"
+$url="https://s3.amazonaws.com/weslson.com/$file"
+$wc = New-Object net.webclient
+$wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
+$wc = New-Object net.webclient
+Start-Process msiexec.exe -Wait -ArgumentList "/I c:\larktemp\jdk-8u231-windows-x64.exe /s"
 
 $file="vmware.zip"
 $url="https://s3.amazonaws.com/weslson.com/$file"
