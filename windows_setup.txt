@@ -1,7 +1,10 @@
 # Puppet agent download
 # https://downloads.puppetlabs.com/windows/puppet5/
+# https://stackoverflow.com/questions/41618766/powershell-invoke-webrequest-fails-with-ssl-tls-secure-channel
 
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Set-ExecutionPolicy Bypass -Scope Process -Force; 
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).path)\..\.."
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 refreshenv
@@ -22,21 +25,21 @@ Start-Process msiexec.exe -Wait -ArgumentList "/I ${install_file} /quiet"
 sleep 30
 refreshenv
 
+# https://www.snel.com/support/install-chrome-in-windows-server/
+$LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; $Process2Monitor =  "ChromeInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+
 cd "C:\ProgramData\PuppetLabs\code\modules"
 puppet module install puppetlabs-dsc --version 1.9.3
-git clone https://github.com/puppetlabs/puppetlabs-reboot.git
-git clone https://github.com/nfosdick/windows.git
-puppet module install puppetlabs-powershell --version 2.3.0
+#git clone https://github.com/puppetlabs/puppetlabs-reboot.git
+#git clone https://github.com/nfosdick/windows.git
+#git clone https://github.com/nfosdick/fcb_java.git
+#git clone https://github.com/nfosdick/fcb_tomcat.git
+#puppet module install puppetlabs-powershell --version 2.3.0
+#puppet module install puppet-windows_env --version 3.2.0
+git clone https://github.com/nfosdick/fcb_apache_v2.git
+puppet apply -e 'include fcb_apache_v2'
+
 cd "C:\ProgramData\PuppetLabs\code\modules\windows\manifests"
-
-
-#windows 
-$file="jdk-8u231-windows-x64.exe"
-$url="https://s3.amazonaws.com/weslson.com/$file"
-$wc = New-Object net.webclient
-$wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
-$wc = New-Object net.webclient
-Start-Process msiexec.exe -Wait -ArgumentList "/I c:\larktemp\jdk-8u231-windows-x64.exe /s"
 
 $file="vmware.zip"
 $url="https://s3.amazonaws.com/weslson.com/$file"
@@ -53,7 +56,49 @@ puppet apply .\test.pp
 
 
 
+# Linux
+# https://puppet.com/docs/puppet/5.5/puppet_platform.html
+#wget https://apt.puppetlabs.com/puppet5-release-bionic.deb
+#dpkg -i puppet5-release-bionic.deb
+#apt update
+#apt-get install puppet-agent
 
+wget https://yum.puppet.com/puppet6-release-el-5.noarch.rpm
+rpm -Uvh puppet6-release-el-5.noarch.rpm
+source /etc/profile
+yum install -y puppet-agent
+cd /etc/puppetlabs/code/modules/
+source /etc/profile
+yum install -y git
+ssh -o StrictHostKeyChecking=no git@github.com
+# https://stackoverflow.com/questions/49128953/fatal-unable-to-access-https-github-com-gabelerner-canvg-git-peer-reports
+yum update -y nss curl libcurl
+
+#Linux Apache
+puppet module install puppetlabs-apache --version 5.4.0
+git clone https://github.com/nfosdick/fcb_apache_v2.git
+
+#Linux Tomcat
+git clone https://github.com/nfosdick/fcb_java.git
+#git clone https://github.com/puppetlabs/puppetlabs-tomcat.git
+puppet module install puppetlabs-tomcat --version 4.0.0
+mv puppetlabs-tomcat tomcat 
+git clone https://github.com/nfosdick/fcb_tomcat.git
+puppet module install puppetlabs-java --version 6.0.0
+cd /etc/puppetlabs/code/modules/fcb_java/manifests
+puppet apply test.pp
+
+
+
+
+
+#windows
+#$file="jdk-8u231-windows-x64.exe"
+#$url="https://s3.amazonaws.com/weslson.com/$file"
+#$wc = New-Object net.webclient
+#$wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
+#$wc = New-Object net.webclient
+#Start-Process msiexec.exe -Wait -ArgumentList "/I c:\larktemp\jdk-8u231-windows-x64.exe /s"
 
 #vssadmin add ShadowStorage /For=C: /On=C: /MaxSize=1G
 #mkdir c:\Install\scripts

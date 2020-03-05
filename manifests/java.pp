@@ -2,9 +2,18 @@ class windows::java(
   $url              = 'https://s3.amazonaws.com/weslson.com',
   $destination_path = 'c:/larktemp',
   $install_version  = '8u231',
+  $java_version     = '8.0.2310.11',
   $architecture     = $facts['architecture'],
 ){
 
+
+  # Manual Run
+  # $file="jdk-8u231-windows-x64.exe"
+  # $url="https://s3.amazonaws.com/weslson.com/$file"
+  # $wc = New-Object net.webclient
+  # $wc.Downloadfile("${url}", "c:\${parentdir}\${file}")
+  # $wc = New-Object net.webclient
+  # Start-Process msiexec.exe -Wait -ArgumentList "/I c:\larktemp\jdk-8u231-windows-x64.exe /s"
   dsc_xremotefile {"Download jdk-${install_version}-windows-${architecture}.exe":
     dsc_destinationpath => "${destination_path}/jdk-${install_version}-windows-${architecture}.exe",
     dsc_uri             => "${url}/jdk-${install_version}-windows-${architecture}.exe",
@@ -28,8 +37,8 @@ class windows::java(
   # https://github.com/cyberious/puppet-windows_java/blob/master/manifests/jdk.pp
   exec { "Install jdk-${install_version}-windows-${architecture}.exe":
     command  => "Start-Process -FilePath ${destination_path}/jdk-${install_version}-windows-${architecture}.exe -ArgumentList '/s' -Wait",
-    unless   => 'if(Get-Command java | Select-Object Version|Select-String 8.0.2310.11){ exit 0 }else{ exit 1 }',
-    #unless   => 'Get-Command java | Select-Object Version|Select-String 8.0.2310.11',
+    unless   => "if(Get-Command java | Select-Object Version|Select-String ${java_version}){ exit 0 }else{ exit 1 }",
+    #unless   => 'if(Get-Command java | Select-Object Version|Select-String 8.0.2310.11){ exit 0 }else{ exit 1 }',
     provider => powershell,
   }
 }
